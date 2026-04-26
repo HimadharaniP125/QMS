@@ -1,0 +1,54 @@
+# Quality Management System (QMS) Implementation Plan
+
+Build a comprehensive pharmaceutical QMS with a premium React frontend and a robust Node.js/Express backend. The system will handle tracking of quality checks, deviations, CAPAs, and more.
+
+## User Review Required
+
+> [!IMPORTANT]
+> The application will consist of a separate frontend (React) and backend (Node.js). You will need to run two terminal processes: one for the frontend (`npm run dev`) and one for the backend.
+
+## Proposed Changes
+
+### Backend (Node.js/Express)
+A new backend will be created in a `server` directory.
+
+#### [NEW] `server/server.js`
+Main entry point for the backend API.
+- Express setup
+- REST endpoints for each module:
+    - `/api/ipq`: In-Process Quality
+    - `/api/deviations`: Deviation Management
+    - `/api/capa`: CAPA
+    - `/api/fpq`: In-Product Quality
+    - `/api/complaints`: Product Complaints
+    - `/api/recalls`: Recall Management
+    - `/api/aer`: Adverse Event Reporting
+    - `/api/suppliers`: Supplier Management
+- Shared data storage (In-memory for demo).
+
+### Frontend (React/Vite)
+Update the existing Vite project in the `QMS` subfolder.
+
+#### [MODIFY] `QMS/src/App.jsx`
+- Main layout with navigation sidebar.
+- State management for active module/tab.
+
+#### [NEW] `QMS/src/components/Dashboard.jsx`
+Overview of all QMS activities with status indicators.
+
+#### [NEW] `QMS/src/components/ModuleView.jsx`
+Generic or specific views for each QMS module.
+
+#### [MODIFY] `QMS/src/index.css`
+Premium design system with modern aesthetics.
+
+## Verification Plan
+
+### Automated Tests
+- Verification of API endpoints.
+- UI flow testing using the browser tool.
+
+### Manual Verification
+1. Run backend: `node server/server.js`
+2. Run frontend: `npm run dev`
+3. Verify all 9 modules are accessible.

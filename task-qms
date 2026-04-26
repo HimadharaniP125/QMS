@@ -1,0 +1,16 @@
+# QMS Implementation Task List
+
+- [ ] Setup Backend (Node.js/Express)
+    - [ ] Initialize `server` directory and `package.json`
+    - [ ] Create `server.js` with module endpoints
+    - [ ] Implement mock data for all 9 modules
+- [ ] Setup Frontend (React/Vite)
+    - [ ] Install necessary dependencies (Lucide icons, etc.)
+    - [ ] Create core CSS design system in `index.css`
+    - [ ] Build shared components (Sidebar, Card, Button)
+    - [ ] Implement 9 Module Views
+    - [ ] Connect Frontend to Backend API
+- [ ] Verification & Polish
+    - [ ] Test tab switching and data fetching
+    - [ ] Ensure role-specific views are clear
+    - [ ] Final UI/UX audit
