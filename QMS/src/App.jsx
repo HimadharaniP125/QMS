@@ -122,7 +122,7 @@ const App = () => {
         <div className="mb-10 flex justify-between items-center">
           <h2 className="text-3xl font-bold">{modules.find(m => m.id === activeTab).label}</h2>
           <button 
-            className="flex items-center gap-2 bg-accent hover:bg-accent-hover text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200 shadow-lg shadow-accent/20"
+            className="btn btn-primary"
             onClick={() => {
               setFormData({});
               setEditingId(null);
@@ -152,8 +152,8 @@ const App = () => {
                   </div>
                 ))}
                 <div className="flex justify-end gap-4 mt-10">
-                  <button type="button" className="px-6 py-3 rounded-xl font-semibold bg-white/5 text-secondary-text hover:bg-white/10 hover:text-primary-text transition-all" onClick={() => { setIsModalOpen(false); setEditingId(null); }}>Cancel</button>
-                  <button type="submit" className="px-6 py-3 rounded-xl font-semibold bg-accent text-white hover:bg-accent-hover transition-all shadow-lg shadow-accent/20">{editingId ? 'Update' : 'Create'} Entry</button>
+                  <button type="button" className="btn btn-secondary" onClick={() => { setIsModalOpen(false); setEditingId(null); }}>Cancel</button>
+                  <button type="submit" className="btn btn-primary">{editingId ? 'Update' : 'Create'} Entry</button>
                 </div>
               </form>
             </div>
@@ -183,7 +183,7 @@ const App = () => {
                       {Object.entries(item).filter(([k]) => k !== 'id').map(([key, val]) => (
                         <td key={key} className="px-6 py-4 text-sm">
                           {key === 'status' ? (
-                            <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                            <span className={`badge ${
                               val.toLowerCase() === 'completed' || val.toLowerCase() === 'ok' || val.toLowerCase() === 'released' || val.toLowerCase() === 'approved' 
                                 ? 'bg-success/10 text-success' 
                                 : val.toLowerCase() === 'open' || val.toLowerCase() === 'pending' || val.toLowerCase() === 'investigating' 
@@ -261,19 +261,19 @@ const Dashboard = ({ stats, setActiveTab }) => (
     </div>
     
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-      <div className="bg-panel-bg border border-white/10 rounded-2xl p-6 transition-transform duration-200 hover:-translate-y-1 hover:border-accent cursor-pointer" onClick={() => setActiveTab('deviations')}>
+      <div className="stat-card" onClick={() => setActiveTab('deviations')}>
         <h3 className="text-secondary-text text-sm font-medium mb-2">Open Deviations</h3>
         <div className="text-3xl font-bold text-warning">{stats.openDeviations}</div>
       </div>
-      <div className="bg-panel-bg border border-white/10 rounded-2xl p-6 transition-transform duration-200 hover:-translate-y-1 hover:border-accent cursor-pointer" onClick={() => setActiveTab('capa')}>
+      <div className="stat-card" onClick={() => setActiveTab('capa')}>
         <h3 className="text-secondary-text text-sm font-medium mb-2">Pending CAPAs</h3>
         <div className="text-3xl font-bold text-accent">{stats.pendingCAPA}</div>
       </div>
-      <div className="bg-panel-bg border border-white/10 rounded-2xl p-6 transition-transform duration-200 hover:-translate-y-1 hover:border-accent cursor-pointer" onClick={() => setActiveTab('fpq')}>
+      <div className="stat-card" onClick={() => setActiveTab('fpq')}>
         <h3 className="text-secondary-text text-sm font-medium mb-2">Released Batches</h3>
         <div className="text-3xl font-bold text-success">{stats.releasedBatches}</div>
       </div>
-      <div className="bg-panel-bg border border-white/10 rounded-2xl p-6 transition-transform duration-200 hover:-translate-y-1 hover:border-accent cursor-pointer" onClick={() => setActiveTab('complaints')}>
+      <div className="stat-card" onClick={() => setActiveTab('complaints')}>
         <h3 className="text-secondary-text text-sm font-medium mb-2">Customer Complaints</h3>
         <div className="text-3xl font-bold text-danger">{stats.complaintsTotal}</div>
       </div>
