@@ -6,6 +6,10 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
+app.get('/', (req, res) => {
+    res.send('<h1>QMS Backend is running</h1><p>Access the API at /api/stats, /api/deviations, etc.</p>');
+});
+
 // Mock Data
 let qmsData = {
     ipq: [
@@ -59,6 +63,36 @@ app.post('/api/:module', (req, res) => {
         const newItem = { id: Date.now(), ...req.body, timestamp: new Date().toISOString() };
         qmsData[module].push(newItem);
         res.status(201).json(newItem);
+    } else {
+        res.status(404).json({ error: 'Module not found' });
+    }
+});
+
+app.put('/api/:module/:id', (req, res) => {
+    const { module, id } = req.params;
+    if (qmsData[module]) {
+        const index = qmsData[module].findIndex(item => item.id == id);
+        if (index !== -1) {
+            qmsData[module][index] = { ...qmsData[module][index], ...req.body };
+            res.json(qmsData[module][index]);
+        } else {
+            res.status(404).json({ error: 'Item not found' });
+        }
+    } else {
+        res.status(404).json({ error: 'Module not found' });
+    }
+});
+
+app.delete('/api/:module/:id', (req, res) => {
+    const { module, id } = req.params;
+    if (qmsData[module]) {
+        const index = qmsData[module].findIndex(item => item.id == id);
+        if (index !== -1) {
+            const deletedItem = qmsData[module].splice(index, 1);
+            res.json(deletedItem);
+        } else {
+            res.status(404).json({ error: 'Item not found' });
+        }
     } else {
         res.status(404).json({ error: 'Module not found' });
     }
